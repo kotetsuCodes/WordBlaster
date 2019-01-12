@@ -17,6 +17,7 @@ public class EnemyShip : MonoBehaviour
     Renderer selfRenderer;
 
     public Transform FuelCellPrefabObj;
+    public Transform SmallExplosionPrefabObj;
 
     bool _isDestroyed = false;
 
@@ -80,6 +81,12 @@ public class EnemyShip : MonoBehaviour
     {
         if (isDestroyed() == false && collision.gameObject.tag == "LaserBlast")
         {
+            var smallExplosion = Instantiate(SmallExplosionPrefabObj, new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f), transform.position.y + Random.Range(-0.5f, 0.5f), transform.position.z - 1), transform.rotation);
+
+            var randomScale = Random.Range(1, 3);
+
+            smallExplosion.transform.localScale = new Vector3(randomScale, randomScale, 1);
+
             Destroy(collision.gameObject);
 
             var randomSoundIndex = Random.Range(0, 2);

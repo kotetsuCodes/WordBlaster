@@ -16,6 +16,7 @@ public class WordAsteroid : MonoBehaviour
     readonly bool isCurrentWord;
 
     Renderer selfRenderer;
+    public Transform SmallExplosionPrefabObj;
 
     bool _isDestroyed = false;
 
@@ -77,6 +78,12 @@ public class WordAsteroid : MonoBehaviour
         if (isDestroyed() == false && collision.gameObject.tag == "LaserBlast")
         {
             Destroy(collision.gameObject);
+
+            var smallExplosion = Instantiate(SmallExplosionPrefabObj, new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f), transform.position.y + Random.Range(-0.5f, 0.5f), transform.position.z - 1), transform.rotation);
+
+            var randomScale = Random.Range(1, 3);
+
+            smallExplosion.transform.localScale = new Vector3(randomScale, randomScale, 1);
 
             var randomSoundIndex = Random.Range(0, 2);
 

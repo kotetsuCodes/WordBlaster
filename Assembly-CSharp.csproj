@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\PlanetMovement.cs" />
     <Compile Include="Assets\Scripts\SpaceshipScrollerController.cs" />
     <Compile Include="Assets\Scripts\WordAsteroid.cs" />
+    <Compile Include="Assets\SmallExplosion.cs" />
     <Compile Include="Assets\VerticalMover.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Programs/GameDev/SpaceBlaster/SpaceBlaster/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

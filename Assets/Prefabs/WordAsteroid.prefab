@@ -104,6 +104,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4a7f6f3bd348a6345a02d283af0300d6, type: 3}
   - {fileID: 8300000, guid: 1cae7c6fea393e2429aa4ab38579b96a, type: 3}
   - {fileID: 8300000, guid: 0bc09c1de6588b143a838a6fef087c8a, type: 3}
+  SmallExplosionPrefabObj: {fileID: 7694743812848923686, guid: 5db3fa2dfa181d74b9cf0e983f086016,
+    type: 3}
 --- !u!82 &82166999732834332
 AudioSource:
   m_ObjectHideFlags: 0
