@@ -17,27 +17,59 @@ public class SpaceshipScrollerController : MonoBehaviour
     public int StartingFuel = 100;
     public int CurrentFuel;
 
+    public int MaxShipHealth = 100;
+    public int StartingShipHealth = 100;
+    public int CurrentShipHealth;
+
     float nextFuelUsageTime;
 
     // Use this for initialization
     void Start()
     {
         CurrentFuel = StartingFuel;
+        CurrentShipHealth = StartingShipHealth;
 
         nextFuelUsageTime = Time.time;
         audioSource = GetComponent<AudioSource>();
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame 
     void Update()
     {
-        Debug.Log(CurrentFuel);
+        Debug.Log($"Current Ship Health: {CurrentShipHealth}");
+
+        LevelManager.instance.FuelText.text = CurrentFuel.ToString();
+
+        if (CurrentFuel < 100)
+        {
+            LevelManager.instance.FuelTankImage.sprite = GameManager.instance.FuelText75Sprite;
+        }
+
+        if (CurrentFuel < 75)
+        {
+            LevelManager.instance.FuelTankImage.sprite = GameManager.instance.FuelText50Sprite;
+        }
+
+        if (CurrentFuel < 50)
+        {
+            LevelManager.instance.FuelTankImage.sprite = GameManager.instance.FuelText25Sprite;
+        }
+
+        if (CurrentFuel < 25)
+        {
+            LevelManager.instance.FuelTankImage.sprite = GameManager.instance.FuelTextEmptySprite;
+        }
+
+        if (CurrentFuel >= 100)
+        {
+            LevelManager.instance.FuelTankImage.sprite = GameManager.instance.FuelText100Sprite;
+        }
 
         if (nextFuelUsageTime <= Time.time)
         {
             CurrentFuel = Mathf.Clamp(CurrentFuel - 1, 0, MaxFuel);
-            nextFuelUsageTime = Time.time + 2;
+            nextFuelUsageTime = Time.time + 1;
         }
 
         if (CurrentFuel > 0)
@@ -47,8 +79,8 @@ public class SpaceshipScrollerController : MonoBehaviour
 
             if ((horizontalAxis != 0 || verticalAxis != 0) && audioSource.isPlaying == false)
             {
-                audioSource.clip = ThrusterClip;
-                audioSource.Play();
+                // audioSource.clip = ThrusterClip;
+                // audioSource.Play();
             }
 
             if (Input.GetButtonUp("Submit"))
@@ -128,6 +160,11 @@ public class SpaceshipScrollerController : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).y, transform.position.z);
             }
         }
+    }
+
+    public void DamageShipHealth(int damageAmount)
+    {
+        CurrentShipHealth = Mathf.Clamp(CurrentShipHealth - damageAmount, 0, MaxShipHealth);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

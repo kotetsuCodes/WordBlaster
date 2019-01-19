@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
         new HashSet<string> { "not", "hop", "her", "now", "that", "then", "this", "them", "with", "bath", "blue", "water", "live" } ,
         new HashSet<string> { "where", "their", "good", "hold", "many", "friend", "little", "today", "hibernate", "classify", "block", "clock", "would", "musical" } ,
     };
+    public Font MainFont;
+
+    public Sprite FuelTextEmptySprite;
+    public Sprite FuelText25Sprite;
+    public Sprite FuelText50Sprite;
+    public Sprite FuelText75Sprite;
+    public Sprite FuelText100Sprite;
 
     // Use this for initialization
     void Awake()

@@ -7,6 +7,7 @@ TagManager:
   - LaserBlast
   - LevelManager
   - FuelCell
+  - UICanvas
   layers:
   - Default
   - TransparentFX

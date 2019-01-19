@@ -27,6 +27,13 @@ public class LevelManager : MonoBehaviour
     public Transform[] PlanetPrefabs;
     Transform currentPlanet;
 
+    public GameObject PlayerShipObj;
+    public SpaceshipScrollerController PlayerShip;
+
+    Canvas uiCanvas;
+
+    public Text FuelText;
+
     //public Transform TinyPlanet;
     //public Transform SmallPlanet;
     //public Transform MediumPlanet;
@@ -40,6 +47,8 @@ public class LevelManager : MonoBehaviour
 
     private bool asteroidBlasterIsReady;
 
+    public Image FuelTankImage;
+
     private void Awake()
     {
         if (instance == null)
@@ -48,6 +57,77 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        PlayerShip = PlayerShipObj.GetComponent<SpaceshipScrollerController>();
+        uiCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
+        setupUI();
+    }
+
+    private void setupUI()
+    {
+        GameObject imageContainerObj = new GameObject();
+        Image imageContainer = imageContainerObj.AddComponent<Image>();
+        imageContainer.type = Image.Type.Sliced;
+
+        imageContainer.color = Color.black;
+
+        var rectTransform = imageContainer.GetComponent<RectTransform>();
+        rectTransform.SetParent(uiCanvas.transform);
+
+        rectTransform.offsetMin = new Vector2(0.0f, 0.0f);
+        rectTransform.offsetMax = new Vector2(0.0f, 0.0f);
+
+        rectTransform.anchoredPosition = new Vector2(0, 0);
+        rectTransform.localScale = new Vector2(1, 1);
+        rectTransform.anchorMin = new Vector2(0.0f, 1.0f);
+        rectTransform.anchorMax = new Vector2(1.0f, 1.0f);
+        rectTransform.pivot = new Vector2(0.5f, 1.0f);
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 50);
+        imageContainerObj.SetActive(true);
+
+        GameObject fuelTankImageObj = new GameObject();
+        FuelTankImage = fuelTankImageObj.AddComponent<Image>();
+        FuelTankImage.sprite = GameManager.instance.FuelText100Sprite;
+        var fuelTankImageRectTransform = FuelTankImage.GetComponent<RectTransform>();
+        fuelTankImageRectTransform.SetParent(imageContainer.transform);
+
+        fuelTankImageRectTransform.offsetMin = new Vector2(0.0f, 0.0f);
+        fuelTankImageRectTransform.offsetMax = new Vector2(0.0f, 0.0f);
+
+        fuelTankImageRectTransform.anchoredPosition = new Vector2(0, 0);
+        fuelTankImageRectTransform.localScale = new Vector3(1, 1);
+        fuelTankImageRectTransform.anchorMin = new Vector2(0.0f, 0.5f);
+        fuelTankImageRectTransform.anchorMax = new Vector2(0.0f, 0.5f);
+        fuelTankImageRectTransform.pivot = new Vector2(0.0f, 0.5f);
+        fuelTankImageRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 25);
+        fuelTankImageRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 170);
+        fuelTankImageObj.SetActive(true);
+
+        GameObject fuelTextObj = new GameObject();
+        FuelText = fuelTextObj.AddComponent<Text>();
+
+        FuelText.fontSize = 24;
+        FuelText.alignment = TextAnchor.MiddleCenter;
+        FuelText.color = Color.white;
+
+        var fuelTextRectTransform = FuelText.GetComponent<RectTransform>();
+
+        fuelTextRectTransform.SetParent(imageContainer.transform);
+
+        fuelTextRectTransform.offsetMin = new Vector2(0.25f, 0);
+        fuelTextRectTransform.offsetMax = new Vector2(0.25f, 0);
+
+        fuelTextRectTransform.anchoredPosition = new Vector2(62, 0);
+        fuelTextRectTransform.localScale = new Vector3(1, 1);
+        fuelTextRectTransform.anchorMin = new Vector2(0.0f, 0.5f);
+        fuelTextRectTransform.anchorMax = new Vector2(0.0f, 0.5f);
+        fuelTextRectTransform.pivot = new Vector2(0.0f, 0.5f);
+        fuelTextRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 72);
+        fuelTextRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 256);
+        FuelText.font = GameManager.instance.MainFont;
     }
 
     public void InitializeLevelManager(HashSet<string> possibleWords)
@@ -77,6 +157,9 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        // get fuel value
+
+
         // generate planets
         if (currentPlanet == null && nextPlanetGenerationTime <= Time.time)
         {

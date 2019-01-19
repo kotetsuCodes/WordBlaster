@@ -60,18 +60,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EnemyShip.cs" />
     <Compile Include="Assets\Scripts\AsteroidGenerator.cs" />
     <Compile Include="Assets\Scripts\AutoscrollingBackground.cs" />
     <Compile Include="Assets\Scripts\DoNotDestroy.cs" />
+    <Compile Include="Assets\Scripts\EnemyShip.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LaserBlast.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\PlanetMovement.cs" />
+    <Compile Include="Assets\Scripts\SmallExplosion.cs" />
     <Compile Include="Assets\Scripts\SpaceshipScrollerController.cs" />
+    <Compile Include="Assets\Scripts\VerticalMover.cs" />
     <Compile Include="Assets\Scripts\WordAsteroid.cs" />
-    <Compile Include="Assets\SmallExplosion.cs" />
-    <Compile Include="Assets\VerticalMover.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Programs/GameDev/SpaceBlaster/SpaceBlaster/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
